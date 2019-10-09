@@ -37,10 +37,12 @@ var getList = function(PlanetList)
 {
 return d3.select("#B4")
   .selectAll("ol")
-  .data(PlanetList)
+  .data("d")
   .enter()
-  .append("ol");
-    d3.selectAll("ol")
+  .append("ol")
+    .selectAll("ol")
+    .data(PlanetList)
+    .enter()
     .append("li")
     .text(function(d) {return (d.name)})
 }
