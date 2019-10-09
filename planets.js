@@ -12,19 +12,35 @@ d3.select("#A2")
   .append("div")
   .text(function(d) {return d})
 var planPromise = d3.json("planets.json")
-    planPromise.then(function(planets)
+
+planPromise.then(function(planets)
         {
             console.log(planets)
+            getImages(planets)
+            getList(planets)
         },
     function(err)
         {
             return err
         })
 
-
-d3.select("#B3")
+var getImages = function(Planetsdata)
+{
+return d3.select("#B3")
   .selectAll("img")
-  .data(planPromise)
+  .data(Planetsdata)
   .enter()
   .append("img")
-  .attr("src", "bob")
+  .attr("src", function(d) {return (d.img)})
+}
+var getList = function(PlanetList)
+{
+return d3.select("#B4")
+  .selectAll("ol")
+  .data(PlanetList)
+  .enter()
+  .append("ol");
+    d3.selectAll("ol")
+    .append("li")
+    .text(function(d) {return (d.name)})
+}
